@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Agatha's 18th Birthday | Moonlit Reverie</title>
+
+  <!-- SEO & Social Meta -->
+  <meta name="description"
+    content="You are cordially invited to celebrate Agatha's 18th Birthday: Moonlit Reverie on Saturday, January 16, 2027 at Marikina Hotel & Convention Center.">
+  <meta property="og:title" content="Agatha's 18th Birthday | Moonlit Reverie">
+  <meta property="og:description" content="A decade and eight. Join us under the moonlight on January 16, 2027.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Twinkling 4-Point Star Sparkle Canvas -->
+  <canvas id="starsCanvas"></canvas>
+
+  <!-- ==========================================
+       WELCOME / ENVELOPE OPENING OVERLAY
+       ========================================== -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-box">
+      <!-- Miniature Glowing Crescent Moon on Seal -->
+      <div class="welcome-wax-seal" id="waxSealBtn" title="Click to open invitation">
+        <svg viewBox="0 0 24 24" class="sparkle-crest-svg">
+          <path d="M12 2 C7 4 3 9 4 15 C5 19 8 21 11 22 C7 19 7 13 13 8 C14.5 7 15.5 5.5 13.5 2 Z" />
+        </svg>
+      </div>
+      <p class="welcome-pretitle">An Invitation To An Evening Of</p>
+      <h1 class="welcome-name">Agatha</h1>
+      <p class="welcome-turns">TURNS 18 • MOONLIT REVERIE</p>
+      <button class="btn-open" id="btnOpenInvite">
+        <span>Open Invitation</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Background Music Element (Claude Debussy - Clair de Lune) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="audio/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Music Toggle Button -->
+  <button class="music-toggle-btn" id="musicToggleBtn" title="Play / Pause Background Music" aria-label="Toggle Music">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+    </svg>
+  </button>
+
+  <!-- Sticky Top Navigation -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="#hero">Home</a>
+      <a href="#invitation">Story</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#specials">18 Specials</a>
+      <a href="#attire">Attire</a>
+      <a href="#location">Venue</a>
+      <a href="#gifts">Wishlist</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="site-wrapper">
+
+    <!-- ==========================================
+         HERO SECTION (AGATHA - SEAMLESSLY BLENDED)
+         ========================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-top-text">
+        <span class="hero-theme-badge">Moonlit Reverie</span>
+        <p class="hero-sky-tagline">A DECADE AND EIGHT</p>
+      </div>
+
+      <!-- Debutante Photo: Seamlessly blended with background (No frames or borders) -->
+      <div class="debutante-blend-wrapper">
+        <div class="debutante-glow-backdrop" aria-hidden="true"></div>
+        <img src="images/debutante-placeholder.jfif" alt="Agatha - 18th Birthday Debutante"
+          class="debutante-blend-photo" onerror="this.onerror=null; this.src='Inspiration.jfif';">
+      </div>
+
+      <div class="hero-names">
+        <h1 class="hero-main-name">Agatha</h1>
+        <p class="hero-eighteen">TURNS 18</p>
+        <div class="hero-celestial-pill">
+          <span>✦ JANUARY 16, 2027 ✦</span>
+        </div>
+      </div>
+
+      <p class="hero-date-venue">
+        <span>Saturday, January 16, 2027</span>
+        <span class="gold-sep">•</span>
+        <span>5:00 PM</span>
+        <br>
+        <span class="text-gold">Marikina Hotel &amp; Convention Center</span>
+      </p>
+
+      <!-- Live Countdown -->
+      <div class="countdown-container">
+        <div class="countdown-box">
+          <span class="countdown-number" id="cdDays">00</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-number" id="cdHours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-number" id="cdMinutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-number" id="cdSeconds">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         INVITATION LETTER / STORY
+         ========================================== -->
+    <section class="invitation-letter-card glass-card" id="invitation">
+      <span class="section-tag"><span class="star-accent">✦</span> A Cordial Invitation <span
+          class="star-accent">✦</span></span>
+      <h2 class="section-title">You are Invited!</h2>
+
+      <svg class="letter-flourish" viewBox="0 0 100 20" fill="none" stroke="#e6caa3" stroke-width="1.5">
+        <path d="M0 10 Q25 0 50 10 T100 10 M40 10 A10 10 0 0 1 60 10" />
+      </svg>
+
+      <div class="letter-body">
+        <p>
+          As I step into a brand new chapter of my life, I find myself reflecting on the moments,
+          memories, and treasured souls who have shaped the person I am today.
+        </p>
+        <br>
+        <p>
+          With a grateful heart, I invite you to join me for an evening of beauty, warmth, and enchantment —
+          a celebration illuminated under a <strong>Moonlit Reverie</strong>.
+        </p>
+        <br>
+        <p>
+          Let us gather across the shimmering starlit waters to weave new memories together in a night filled with joy,
+          laughter, and timeless meaning.
+        </p>
+      </div>
+
+      <p class="script-font letter-sign">Yours truly, Agatha</p>
+    </section>
+
+
+    <!-- ==========================================
+         TIMELINE OF EVENTS (PROGRAM FLOW WITH STARS)
+         ========================================== -->
+    <section class="timeline-section" id="timeline">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Evening Flow <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">Debut Timeline</h2>
+        <p class="section-subtitle">A guide to our evening of celebration and unforgettable memories.</p>
+      </div>
+
+      <div class="timeline-flow">
+        <!-- 5:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">5:00 PM</div>
+          <div class="timeline-title">Arrival of Guests</div>
+          <div class="timeline-desc">Registration, welcome refreshments, and photo ops.</div>
+        </div>
+
+        <!-- 6:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">6:00 PM</div>
+          <div class="timeline-title">Grand Entrance of the Debutante</div>
+          <div class="timeline-desc">Welcome presentation and opening toast under the moonlight.</div>
+        </div>
+
+        <!-- 6:30 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">6:30 PM</div>
+          <div class="timeline-title">The Eighteen Program</div>
+          <div class="timeline-desc">18 Roses, 18 Letters, 18 Blessings, and 18 Shots.</div>
+        </div>
+
+        <!-- 7:30 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">Dinner &amp; Serenade</div>
+          <div class="timeline-desc">Grand buffet banquet, live acoustic music, and speeches.</div>
+        </div>
+
+        <!-- 8:30 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">8:30 PM</div>
+          <div class="timeline-title">Blowing of the Cake</div>
+          <div class="timeline-desc">Birthday wishes, debutante’s speech, and family tribute.</div>
+        </div>
+
+        <!-- 9:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24" class="timeline-star-svg">
+              <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+            </svg>
+          </div>
+          <div class="timeline-time">9:00 PM</div>
+          <div class="timeline-title">Party &amp; Open Floor</div>
+          <div class="timeline-desc">Music, celebration, dancing, and midnight merriment.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         THE 18 SPECIALS (ENTOURAGE LIST)
+         ========================================== -->
+    <section class="specials-section" id="specials">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Honored Entourage <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">The 18 Specials</h2>
+        <p class="section-subtitle">To the guiding stars who illuminate my life’s path with love and wisdom.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="tabs-container">
+        <button class="tab-btn active" data-tab="tabRoses">
+          <span class="tab-star">✦</span> 18 Roses
+        </button>
+        <button class="tab-btn" data-tab="tabLetters">
+          <span class="tab-star">✦</span> 18 Letters
+        </button>
+        <button class="tab-btn" data-tab="tabBlessings">
+          <span class="tab-star">✦</span> 18 Blessings
+        </button>
+        <button class="tab-btn" data-tab="tabShots">
+          <span class="tab-star">✦</span> 18 Shots
+        </button>
+      </div>
+
+      <!-- Tab 1: 18 Roses -->
+      <div class="tab-pane active" id="tabRoses">
+        <div class="glass-card">
+          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Roses</h3>
+          <div class="names-grid" id="listRoses">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: 18 Letters -->
+      <div class="tab-pane" id="tabLetters">
+        <div class="glass-card">
+          <div class="tab-notice">
+            <span class="star-accent">✦</span>
+            <span><strong>Special Attire Note:</strong> All participants in the 18 Letters are kindly requested to wear
+              <strong>Navy Blue (#0A4070)</strong>.</span>
+          </div>
+          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Letters &amp; Candles</h3>
+          <div class="names-grid" id="listLetters">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: 18 Blessings -->
+      <div class="tab-pane" id="tabBlessings">
+        <div class="glass-card">
+          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Blessings &amp; Bills</h3>
+          <div class="names-grid" id="listBlessings">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: 18 Shots -->
+      <div class="tab-pane" id="tabShots">
+        <div class="glass-card">
+          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Shots &amp; Treasures</h3>
+          <div class="names-grid" id="listShots">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         ATTIRE & DRESS CODE (PNG READY, GREY BOX)
+         ========================================== -->
+    <section class="attire-section" id="attire">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Dress Code <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">Attire Guide</h2>
+        <p class="section-subtitle">We would love to see you dressed in your finest, celebrating in elegance and class.
+        </p>
+      </div>
+
+      <!-- Color Palette Circles -->
+      <div class="palette-wrapper">
+        <div class="color-swatch-card">
+          <div class="color-circle swatch-navy"></div>
+          <span class="color-name">Navy Blue</span>
+          <span class="color-hex">#0A4070</span>
+        </div>
+        <div class="color-swatch-card">
+          <div class="color-circle swatch-midnight"></div>
+          <span class="color-name">Midnight</span>
+          <span class="color-hex">#051426</span>
+        </div>
+        <div class="color-swatch-card">
+          <div class="color-circle swatch-black"></div>
+          <span class="color-name">Classic Black</span>
+          <span class="color-hex">#0D0F12</span>
+        </div>
+        <div class="color-swatch-card">
+          <div class="color-circle swatch-slate"></div>
+          <span class="color-name">Deep Slate</span>
+          <span class="color-hex">#1A2F47</span>
+        </div>
+        <div class="color-swatch-card">
+          <div class="color-circle swatch-pearl"></div>
+          <span class="color-name">Moonlit Pearl</span>
+          <span class="color-hex">Accent</span>
+        </div>
+      </div>
+
+      <!-- Guidelines Grid with PNG slots -->
+      <div class="attire-cards-grid">
+        <div class="attire-card">
+          <div class="attire-img-slot">
+            <img src="images/attire-ladies.png" alt="Ladies Formal Attire" class="attire-png-preview"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="attire-fallback-icon">
+              <svg viewBox="0 0 24 24" class="attire-star-icon">
+                <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="attire-card-title">Ladies</h3>
+          <p class="attire-card-desc">
+            Classy floor-length evening gowns, formal dresses, or elegant midi skirts.
+            Plain and solid colors preferred to keep the look clean and regal.
+          </p>
+        </div>
+
+        <div class="attire-card">
+          <div class="attire-img-slot">
+            <img src="images/attire-gentlemen.png" alt="Gentlemen Formal Attire" class="attire-png-preview"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="attire-fallback-icon">
+              <svg viewBox="0 0 24 24" class="attire-star-icon">
+                <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="attire-card-title">Gentlemen</h3>
+          <p class="attire-card-desc">
+            Tailored formal suits, blazers with formal slacks, or modern barong tagalog with dark dress shoes.
+          </p>
+        </div>
+
+        <div class="attire-card">
+          <div class="attire-img-slot">
+            <img src="images/attire-guide.png" alt="Formal Theme Guide" class="attire-png-preview"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="attire-fallback-icon">
+              <svg viewBox="0 0 24 24" class="attire-star-icon">
+                <path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5 Z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="attire-card-title">Theme Standard</h3>
+          <p class="attire-card-desc">
+            Strictly Semi-Formal to Formal. Think timeless sophistication, vintage charm, and royal nighttime glow.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sophisticated Grey Bulleted Guidelines -->
+      <div class="attire-notice-box">
+        <h4 class="attire-notice-title"><span class="star-accent">✦</span> Important Dress Code Guidelines</h4>
+        <ul class="attire-bullets">
+          <li><strong>Semi-Formal / Formal Only:</strong> Please dress in elegant, classy evening wear.</li>
+          <li><strong>Plain &amp; Solid Fabrics:</strong> Plain solid colors only. Kindly avoid loud prints, bold
+            stripes, or patterns.</li>
+          <li><strong>Strictly No Denim:</strong> Jeans, denim jackets, and denim skirts are strictly prohibited.</li>
+          <li><strong>No Casual Streetwear &amp; Big Logos:</strong> Please refrain from wearing casual tees, sneakers,
+            or outfits with large commercial brand logos.</li>
+          <li><strong>Reserved Color:</strong> Please avoid wearing all-white, light cream, or beige dresses (reserved
+            exclusively for the debutante).</li>
+          <li><strong>18 Letters Entourage:</strong> All participants of the 18 Letters are kindly requested to wear
+            <strong>Navy Blue (#0A4070)</strong>.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VENUE & LOCATION GUIDE
+         ========================================== -->
+    <section class="location-section" id="location">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Destination <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">Location Guide</h2>
+        <p class="section-subtitle">We look forward to welcoming you at our celebration venue.</p>
+      </div>
+
+      <div class="venue-card glass-card">
+        <div class="venue-content">
+          <h3 class="venue-name">Marikina Hotel &amp; Convention Center</h3>
+          <p class="venue-address">
+            Pio del Pilar Street, Brgy. Concepcion II, Marikina City, 1800 Metro Manila, Philippines
+          </p>
+
+          <div class="venue-buttons">
+            <a href="https://maps.google.com/?q=Marikina+Hotel+and+Convention+Center" target="_blank" rel="noopener"
+              class="btn-nav btn-gmaps">
+              <span class="btn-star">✦</span> Google Maps
+            </a>
+            <a href="https://waze.com/ul?q=Marikina+Hotel+and+Convention+Center" target="_blank" rel="noopener"
+              class="btn-nav btn-waze">
+              <span class="btn-star">✦</span> Waze Navigation
+            </a>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed -->
+        <div class="map-frame-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.278074744772!2d121.111535!3d14.643211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b812b7cfd901%3A0x6b1af95fa43b8e8!2sMarikina%20Hotel%20and%20Convention%20Center!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"
+            loading="lazy" title="Marikina Hotel &amp; Convention Center Map"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         GIFT GUIDE / WISHLIST
+         ========================================== -->
+    <section class="gifts-section" id="gifts">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Gift Suggestions <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">Gift Guide &amp; Wishlist</h2>
+        <p class="section-subtitle">
+          Your presence, love, and prayers are the greatest gifts. However, if you wish to honor Agatha with a present,
+          here is a small guide of tokens she holds dearly to her heart:
+        </p>
+      </div>
+
+      <div class="gift-cards-grid">
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">Fragrance</h4>
+          <p class="gift-desc">Floral, vanilla, or fresh signature scents</p>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">Skincare</h4>
+          <p class="gift-desc">Hydrating skincare, toners, &amp; gentle essentials</p>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">Makeup</h4>
+          <p class="gift-desc">Lip oils, blushes, &amp; beauty favorites</p>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">Fashion &amp; Accents</h4>
+          <p class="gift-desc">Accessories, chic bags, &amp; jewelry pieces</p>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">Monetary Blessings</h4>
+          <p class="gift-desc">Envelope gifts for her college &amp; future ventures</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         RSVP SECTION (DISPATCHES DIRECT TO EMAIL)
+         ========================================== -->
+    <section class="rsvp-section" id="rsvp">
+      <div style="text-align: center;">
+        <span class="section-tag"><span class="star-accent">✦</span> Reserve Your Seat <span
+            class="star-accent">✦</span></span>
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-subtitle">
+          Please confirm your attendance so we can reserve your banquet seat and welcome package.
+        </p>
+      </div>
+
+      <div class="glass-card rsvp-card">
+        <form name="debut-rsvp" method="POST" data-netlify="true" id="rsvpForm">
+          <input type="hidden" name="form-name" value="debut-rsvp">
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="guestName">Your Full Name *</label>
+            <input type="text" id="guestName" name="name" class="form-input" placeholder="e.g. Maria Santos" required>
+          </div>
+
+          <!-- Contact Number -->
+          <div class="form-group">
+            <label class="form-label" for="guestContact">Contact / Mobile Number *</label>
+            <input type="tel" id="guestContact" name="contact" class="form-input" placeholder="e.g. 0917 123 4567"
+              required>
+          </div>
+
+          <!-- Attendance Radio -->
+          <div class="form-group">
+            <label class="form-label">Will you be attending? *</label>
+            <div class="form-radio-group">
+              <label class="radio-label">
+                <input type="radio" name="attendance" value="attending" checked required>
+                <span>Joyfully Accepts <span class="star-accent">✦</span></span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="attendance" value="declined" required>
+                <span>Regretfully Declines</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Number of Guests -->
+          <div class="form-group">
+            <label class="form-label" for="guestCount">Number of Attendees</label>
+            <select id="guestCount" name="guest_count" class="form-select">
+              <option value="1">1 Person (Just me)</option>
+              <option value="2">2 Persons</option>
+            </select>
+          </div>
+
+          <!-- Message for Agatha -->
+          <div class="form-group">
+            <label class="form-label" for="guestMessage">Message &amp; Birthday Wishes for Agatha</label>
+            <textarea id="guestMessage" name="message" class="form-textarea" rows="4"
+              placeholder="Share your warm thoughts, memories, or wishes for the debutante..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Submit RSVP</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       RSVP SUCCESS CONFIRMATION MODAL
+       ========================================== -->
+  <div class="modal-overlay" id="rsvpModal">
+    <div class="modal-box">
+      <h3 class="modal-title">Thank You!</h3>
+      <p class="modal-desc">
+        Your response has been received with boundless love and excitement.
+        We cannot wait to celebrate Agatha’s 18th birthday under the moonlit reverie with you! ✨
+      </p>
+      <button class="btn-modal-close" id="btnCloseModal">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p class="footer-name">Agatha</p>
+    <p class="footer-theme">A Decade and Eight • Moonlit Reverie</p>
+    <p class="footer-copyright">
+      January 16, 2027 • Marikina Hotel &amp; Convention Center
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
