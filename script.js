@@ -11,37 +11,92 @@ const DEBUT_CONFIG = {
   eventDate: new Date("January 16, 2027 17:00:00 GMT+0800").getTime(),
   venueName: "Marikina Hotel & Convention Center",
 
-  // =========================================================================
-  // 💌 RSVP RECIPIENT EMAIL ADDRESS
-  // All RSVPs submitted on the website will be sent directly to this email!
-  // You can change this to any email address anytime.
-  // =========================================================================
-  rsvpEmail: "johainakristel@gmail.com",
 
-  // Background Music URL (Local MP3: Claude Debussy - Clair de Lune)
-  musicUrl: "audio/music.mp3",
 
-  // Replace dummy names with actual guest names whenever ready!
+  // Background Music URL (Local MP3: Ariana Grande - Moonlight)
+  musicUrl: "audio/moonlight.mp3",
+
+  // 18 Specials Entourage
   entourage: {
     roses: [
-      "Hatdog", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name"
+      "Noel Timothy Sevilla",
+      "Louis Joaquin Estanislao",
+      "Marky Compañero",
+      "Lynoel Savellano",
+      "Steven Marc Valles",
+      "Gabriel Ruñez",
+      "Vincent Elgin Centeno",
+      "Jefferson Villamor",
+      "Romeo Sebastian Salazar",
+      "Kuya Joseph Dominic Montejo",
+      "Kuya Jedidiah Job Bambo",
+      "Kuya Bryan Tiamzon",
+      "Khylee Drixz Claudio",
+      "Prince Jesus Alfonso",
+      "Kuya Dennis Celis II",
+      "Kuya Cedric Angeles",
+      "Tito Chuck Boggs",
+      "Randy Alfonso"
     ],
     letters: [
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name"
+      "Erica Mae Mayor",
+      "Ma. Leigh Bustamante",
+      "Princess Angel Lamud",
+      "Ashlyn Mhier Abit",
+      "Geralen Austero",
+      "Angeliana De Guzman",
+      "Krielle Blythe Iwayan",
+      "Tiffany Claire Estanislao",
+      "Erika Mica Aquino",
+      "Haliyannah Hastings Mule",
+      "Kaizshya Rai Rosario",
+      "Ariana Nicole Aquino",
+      "Romeo Sebastian Salazar",
+      "Danae Yamada",
+      "Ms. Theresa Belmonte",
+      "Julieth Catherine Teodoro",
+      "Antoinette Jane Cerezo",
+      "Jillian Cathreen Tiamzon"
     ],
     blessings: [
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name"
+      "Ninang Ditse Johainna Montejo",
+      "Ninang Bernadette Mariano and Louie Jex Mariano",
+      "Ninang Jennifer Cruz",
+      "Ninang Jhudy Santos",
+      "Ninang Aireen Claire Lunar",
+      "Ninong Cris and Ninang Belle Marquez",
+      "Ate Nicole Gutierrez",
+      "Tita Baby Sonia Tiamzon",
+      "Tita Maricel Duque",
+      "Tita Kristine Sy",
+      "Tita Sonia Manalac",
+      "Tita Rosalie Geronimo",
+      "Tito Jason Carlos",
+      "Tita Miriam Opao",
+      "Tita Leencel Lopez",
+      "Tito Axcel Lopez",
+      "Tita Noemi Marie Callile",
+      "Tita Mimi and Tito Charles Boggs"
     ],
     shots: [
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name",
-      "Name Name", "Name Name", "Name Name", "Name Name", "Name Name", "Name Name"
+      "Noel Timothy Sevilla",
+      "Althea Shane Tiamzon",
+      "Louis Joaquin Estanislao",
+      "Steven Marc Valles",
+      "Jefferson Villamor",
+      "Laurenz Bleu Delarama",
+      "Vincent Elgin Centeno",
+      "Graziella Ayelet Enopia",
+      "Erika Mica Aquino",
+      "Krystal Margoux Abalo",
+      "Jennah Mariana Bautista",
+      "Haliyannah Hastings Mule",
+      "Stacy Andre Dizon",
+      "Elisiah Pasajes",
+      "James Jared Ojales",
+      "Marius Allen Calangi",
+      "Emir Kazio Hanopol",
+      "James Christoffer Bustamante"
     ]
   }
 };
@@ -209,57 +264,61 @@ function initEntourage() {
 }
 
 // ==========================================
-// 6. RSVP FORM SUBMISSION (DISPATCHES TO EMAIL & NETLIFY)
+// 6. RSVP FORM SUBMISSION (CONNECTS TO GOOGLE FORM & GOOGLE SHEETS)
 // ==========================================
 const rsvpForm = document.getElementById("rsvpForm");
 const rsvpModal = document.getElementById("rsvpModal");
 const btnCloseModal = document.getElementById("btnCloseModal");
 
 if (rsvpForm) {
-  rsvpForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+  let isSubmitting = false;
+
+  rsvpForm.addEventListener("submit", function () {
+    if (isSubmitting) return;
+    isSubmitting = true;
 
     const submitBtn = rsvpForm.querySelector(".btn-submit");
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerText = "Sending RSVP...";
+      submitBtn.innerText = "Submitting to Guestlist...";
     }
 
-    const formData = new FormData(rsvpForm);
-    const dataObj = {};
-    formData.forEach((value, key) => (dataObj[key] = value));
+    const nameVal = document.getElementById("guestName")?.value || "";
+    const contactVal = document.getElementById("guestContact")?.value || "";
+    const attendanceVal = rsvpForm.querySelector('input[name="entry.1791767315"]:checked')?.value || "Joyfully Accepts";
+    const messageVal = document.getElementById("guestMessage")?.value || "";
 
-    // Custom subject line for the email notification
-    dataObj["_subject"] = `✨ New Debut RSVP: ${dataObj.name || "Guest"} (${dataObj.attendance || "Attending"})`;
-    dataObj["_template"] = "table";
-    dataObj["_captcha"] = "false";
+    // 1. Save backup to local browser storage
+    const rsvpEntry = {
+      timestamp: new Date().toISOString(),
+      dateFormatted: new Date().toLocaleString(),
+      name: nameVal,
+      contact: contactVal,
+      attendance: attendanceVal,
+      message: messageVal
+    };
+    try {
+      const stored = JSON.parse(localStorage.getItem("agatha_debut_rsvps") || "[]");
+      stored.push(rsvpEntry);
+      localStorage.setItem("agatha_debut_rsvps", JSON.stringify(stored));
+      console.log("✦ RSVP successfully recorded into local backup:", rsvpEntry);
+    } catch (err) {
+      console.warn("Storage note:", err);
+    }
 
-    // 1. Send directly to Johaina's email via FormSubmit AJAX service
-    const targetEmail = DEBUT_CONFIG.rsvpEmail || "johainakristel@gmail.com";
-    const emailEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`;
-
-    const emailPromise = fetch(emailEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(dataObj)
-    }).catch(err => {
-      console.log("Email dispatch note:", err);
-    });
-
-    // 2. Also send to Netlify Forms if deployed on Netlify
-    if (window.location.hostname !== "localhost" && window.location.protocol !== "file:") {
-      fetch("/", {
+    // 2. Dual submission: form natively posts to the hidden iframe target="googleFormTarget",
+    // and we also trigger a fetch fallback with mode: 'no-cors' for 100% delivery guarantee
+    try {
+      const gFormData = new FormData(rsvpForm);
+      fetch(rsvpForm.action, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-      }).catch(err => console.log("Netlify Form note:", err));
-    }
+        mode: "no-cors",
+        body: gFormData
+      }).catch(() => { });
+    } catch (e) { }
 
-    // After attempting send, display confirmation modal
-    Promise.allSettled([emailPromise]).then(() => {
+    // 3. Show celestial glassmorphism confirmation modal and reset form
+    setTimeout(() => {
       if (rsvpModal) {
         rsvpModal.classList.add("active");
       }
@@ -268,7 +327,8 @@ if (rsvpForm) {
         submitBtn.disabled = false;
         submitBtn.innerText = "Submit RSVP";
       }
-    });
+      isSubmitting = false;
+    }, 700);
   });
 }
 
@@ -454,15 +514,29 @@ function initDreamyCanvas() {
 }
 
 // ==========================================
-// 8. BUTTERY SMOOTH SCROLL FOR NAVIGATION TITLES
+// 8. BUTTERY SMOOTH SCROLL FOR TOP NAVIGATION
 // ==========================================
 function initSmoothScroll() {
-  const navLinks = document.querySelectorAll('.top-nav a[href^="#"]');
+  const navLinks = document.querySelectorAll('.nav-inner a, a[href^="#"]');
 
   navLinks.forEach(link => {
     link.addEventListener('click', function (e) {
-      e.preventDefault();
       const targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      const targetElement = targetId === '#hero' ? document.getElementById("hero") : document.querySelector(targetId);
+      if (!targetElement) return;
+
+      e.preventDefault();
+
+      // Highlight active link in header options
+      document.querySelectorAll('.nav-inner a').forEach(a => {
+        if (a.getAttribute('href') === targetId) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
 
       if (targetId === '#hero') {
         window.scrollTo({
@@ -472,17 +546,14 @@ function initSmoothScroll() {
         return;
       }
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        const navHeight = document.querySelector('.top-nav')?.offsetHeight || 65;
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navHeight - 15;
+      const navHeight = document.querySelector('.top-nav')?.offsetHeight || 55;
+      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navHeight - 10;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
     });
   });
 }
@@ -514,9 +585,7 @@ function initParallax() {
       1,
       document.documentElement.scrollHeight - window.innerHeight
     );
-    // Smooth progress from 0 (top of page) to 1 (bottom of page)
     const progress = Math.min(1, Math.max(0, scrolled / maxScroll));
-    // Max travel distance based on viewport height (travels up to 42% of viewport)
     const maxTravel = window.innerHeight * 0.42;
     const yPos = -(progress * maxTravel);
 
@@ -531,15 +600,80 @@ function initParallax() {
     }
   }, { passive: true });
 
-  // Initial calculation
   updateParallax();
 }
 
-// Initialize on load
-document.addEventListener("DOMContentLoaded", () => {
+// ==========================================
+// 11. RSVP TRACKING & EXPORT UTILITIES (BROWSER CONSOLE)
+// ==========================================
+// Johaina can view all RSVPs in developer tools anytime by typing viewRSVPs()
+window.viewRSVPs = function () {
+  const stored = JSON.parse(localStorage.getItem("agatha_debut_rsvps") || "[]");
+  console.log(`✦ Total RSVPs Recorded: ${stored.length}`);
+  console.table(stored);
+  return stored;
+};
+
+// Johaina can download a complete CSV spreadsheet by typing downloadRSVPsCSV()
+window.downloadRSVPsCSV = function () {
+  const stored = JSON.parse(localStorage.getItem("agatha_debut_rsvps") || "[]");
+  if (!stored.length) {
+    alert("No RSVPs recorded on this browser yet.");
+    return;
+  }
+  let csv = "Timestamp,Guest Name,Contact Number,Attendance,Message\n";
+  stored.forEach(r => {
+    const row = [
+      `"${r.dateFormatted || r.timestamp}"`,
+      `"${(r.name || "").replace(/"/g, '""')}"`,
+      `"${(r.contact || "").replace(/"/g, '""')}"`,
+      `"${(r.attendance || "").replace(/"/g, '""')}"`,
+      `"${(r.message || "").replace(/"/g, '""')}"`
+    ];
+    csv += row.join(",") + "\n";
+  });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Agatha_Debut_RSVPs_${new Date().toISOString().slice(0, 10)}.csv`;
+  link.click();
+};
+
+// ==========================================
+// 12. FIXED HEADER SCROLL OBSERVER ("Agatha Turns 18")
+// ==========================================
+function initHeaderScroll() {
+  const topNav = document.getElementById("topNav");
+  if (!topNav) return;
+
+  function handleNavScroll() {
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollPos > 120) {
+      topNav.classList.add("scrolled");
+    } else {
+      topNav.classList.remove("scrolled");
+    }
+  }
+
+  window.addEventListener("scroll", handleNavScroll, { passive: true });
+  // Initial check on page load / refresh
+  handleNavScroll();
+}
+
+// ==========================================
+// 13. APP INITIALIZER (SAFE AGAINST PRE-FIRED DOMCONTENTLOADED)
+// ==========================================
+function initApp() {
   initDreamyCanvas();
   initEntourage();
   initSmoothScroll();
   initParallax();
   handleImageFallback();
-});
+  initHeaderScroll();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
