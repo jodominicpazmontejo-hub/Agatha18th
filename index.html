@@ -33,11 +33,11 @@
        ========================================== -->
   <div class="welcome-overlay" id="welcomeOverlay">
     <div class="welcome-box">
-      <!-- Miniature Glowing Crescent Moon on Seal -->
-      <div class="welcome-wax-seal" id="waxSealBtn" title="Click to open invitation">
-        <svg viewBox="0 0 24 24" class="sparkle-crest-svg">
-          <path d="M12 2 C7 4 3 9 4 15 C5 19 8 21 11 22 C7 19 7 13 13 8 C14.5 7 15.5 5.5 13.5 2 Z" />
-        </svg>
+      <!-- Debutante Portrait on First Page / Cover -->
+      <div class="welcome-photo-frame" id="waxSealBtn" title="Click to open invitation">
+        <img src="images/2.jfif" alt="Agatha - 18th Birthday Debutante" class="welcome-cover-img"
+          onerror="this.onerror=null; this.src='images/debutante-placeholder.jfif';">
+        <div class="welcome-photo-glow" aria-hidden="true"></div>
       </div>
       <p class="welcome-pretitle">An Invitation To An Evening Of</p>
       <h1 class="welcome-name">Agatha</h1>
@@ -51,8 +51,9 @@
     </div>
   </div>
 
-  <!-- Background Music Element (Claude Debussy - Clair de Lune) -->
+  <!-- Background Music Element (Ariana Grande - Moonlight) -->
   <audio id="bgMusic" loop preload="auto">
+    <source src="audio/moonlight.mp3" type="audio/mpeg">
     <source src="audio/music.mp3" type="audio/mpeg">
   </audio>
 
@@ -63,17 +64,23 @@
     </svg>
   </button>
 
-  <!-- Sticky Top Navigation -->
-  <nav class="top-nav">
-    <div class="nav-inner">
-      <a href="#hero">Home</a>
-      <a href="#invitation">Story</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#specials">18 Specials</a>
-      <a href="#attire">Attire</a>
-      <a href="#location">Venue</a>
-      <a href="#gifts">Wishlist</a>
-      <a href="#rsvp">RSVP</a>
+  <!-- Fixed Top Navigation Bar (Always stays fixed at the top on scroll) -->
+  <nav class="top-nav" id="topNav">
+    <div class="top-nav-wrap">
+      <a href="#hero" class="nav-brand" id="navBrand" title="Agatha Turns 18 - Return to Top">
+        <span class="brand-name">Agatha</span>
+        <span class="brand-sub">Turns 18</span>
+      </a>
+      <div class="nav-inner">
+        <a href="#hero" class="active">Home</a>
+        <a href="#invitation">Story</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#specials">18 Specials</a>
+        <a href="#attire">Attire</a>
+        <a href="#location">Venue</a>
+        <a href="#gifts">Wishlist</a>
+        <a href="#rsvp" class="nav-rsvp-btn">RSVP</a>
+      </div>
     </div>
   </nav>
 
@@ -92,8 +99,8 @@
       <!-- Debutante Photo: Seamlessly blended with background (No frames or borders) -->
       <div class="debutante-blend-wrapper">
         <div class="debutante-glow-backdrop" aria-hidden="true"></div>
-        <img src="images/debutante-placeholder.jfif" alt="Agatha - 18th Birthday Debutante"
-          class="debutante-blend-photo" onerror="this.onerror=null; this.src='Inspiration.jfif';">
+        <img src="images/1.jfif" alt="Agatha - 18th Birthday Debutante" class="debutante-blend-photo"
+          onerror="this.onerror=null; this.src='images/debutante-placeholder.jfif';">
       </div>
 
       <div class="hero-names">
@@ -212,7 +219,7 @@
           </div>
           <div class="timeline-time">6:30 PM</div>
           <div class="timeline-title">The Eighteen Program</div>
-          <div class="timeline-desc">18 Roses, 18 Letters, 18 Blessings, and 18 Shots.</div>
+          <div class="timeline-desc">18 Roses, 18 Letters, 18 Monetary Blessings, and 18 Shots.</div>
         </div>
 
         <!-- 7:30 PM -->
@@ -274,7 +281,7 @@
           <span class="tab-star">✦</span> 18 Letters
         </button>
         <button class="tab-btn" data-tab="tabBlessings">
-          <span class="tab-star">✦</span> 18 Blessings
+          <span class="tab-star">✦</span> 18 Monetary Blessings
         </button>
         <button class="tab-btn" data-tab="tabShots">
           <span class="tab-star">✦</span> 18 Shots
@@ -297,7 +304,8 @@
           <div class="tab-notice">
             <span class="star-accent">✦</span>
             <span><strong>Special Attire Note:</strong> All participants in the 18 Letters are kindly requested to wear
-              <strong>Navy Blue (#0A4070)</strong>.</span>
+              <span class="color-badge-inline"><span class="color-swatch-circle"
+                  style="background-color: #0A4070;"></span><strong>Navy Blue</strong></span>.</span>
           </div>
           <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Letters &amp; Candles</h3>
           <div class="names-grid" id="listLetters">
@@ -306,10 +314,10 @@
         </div>
       </div>
 
-      <!-- Tab 3: 18 Blessings -->
+      <!-- Tab 3: 18 Monetary Blessings -->
       <div class="tab-pane" id="tabBlessings">
         <div class="glass-card">
-          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Blessings &amp; Bills</h3>
+          <h3 class="tab-card-header"><span class="star-accent">✦</span> 18 Monetary Blessings</h3>
           <div class="names-grid" id="listBlessings">
             <!-- Populated by script.js -->
           </div>
@@ -361,11 +369,6 @@
           <div class="color-circle swatch-slate"></div>
           <span class="color-name">Deep Slate</span>
           <span class="color-hex">#1A2F47</span>
-        </div>
-        <div class="color-swatch-card">
-          <div class="color-circle swatch-pearl"></div>
-          <span class="color-name">Moonlit Pearl</span>
-          <span class="color-hex">Accent</span>
         </div>
       </div>
 
@@ -425,16 +428,15 @@
       <div class="attire-notice-box">
         <h4 class="attire-notice-title"><span class="star-accent">✦</span> Important Dress Code Guidelines</h4>
         <ul class="attire-bullets">
-          <li><strong>Semi-Formal / Formal Only:</strong> Please dress in elegant, classy evening wear.</li>
-          <li><strong>Plain &amp; Solid Fabrics:</strong> Plain solid colors only. Kindly avoid loud prints, bold
-            stripes, or patterns.</li>
-          <li><strong>Strictly No Denim:</strong> Jeans, denim jackets, and denim skirts are strictly prohibited.</li>
-          <li><strong>No Casual Streetwear &amp; Big Logos:</strong> Please refrain from wearing casual tees, sneakers,
-            or outfits with large commercial brand logos.</li>
-          <li><strong>Reserved Color:</strong> Please avoid wearing all-white, light cream, or beige dresses (reserved
-            exclusively for the debutante).</li>
+          <li><strong>Strictly Formal Wear:</strong> Please dress in elegant, classy evening wear (formal suits, blazers
+            with slacks, floor-length gowns, or chic formal dresses). Kindly avoid casual attire.</li>
+          <li><strong>Plain &amp; Solid Colors:</strong> Plain solid colors only (Navy Blue, Midnight, and Classic
+            Black). Solid, unpatterned fabrics preferred to keep the celebration timeless.</li>
+          <li><strong>Strictly Reserved Color:</strong> White, cream, and light beige are strictly reserved exclusively
+            for the debutante.</li>
           <li><strong>18 Letters Entourage:</strong> All participants of the 18 Letters are kindly requested to wear
-            <strong>Navy Blue (#0A4070)</strong>.
+            <span class="color-badge-inline"><span class="color-swatch-circle"
+                style="background-color: #0A4070;"></span><strong>Navy Blue</strong></span>.
           </li>
         </ul>
       </div>
@@ -524,6 +526,12 @@
 
         <div class="gift-item">
           <div class="gift-icon-star">✦</div>
+          <h4 class="gift-title">College Essentials</h4>
+          <p class="gift-desc">Study necessities, desk essentials, &amp; university tools</p>
+        </div>
+
+        <div class="gift-item">
+          <div class="gift-icon-star">✦</div>
           <h4 class="gift-title">Monetary Blessings</h4>
           <p class="gift-desc">Envelope gifts for her college &amp; future ventures</p>
         </div>
@@ -545,20 +553,24 @@
       </div>
 
       <div class="glass-card rsvp-card">
-        <form name="debut-rsvp" method="POST" data-netlify="true" id="rsvpForm">
-          <input type="hidden" name="form-name" value="debut-rsvp">
+        <!-- Hidden iframe to submit to Google Forms silently in the background -->
+        <iframe name="googleFormTarget" id="googleFormTarget" style="display:none;" aria-hidden="true"></iframe>
 
+        <form name="debut-rsvp" method="POST"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfLPeXsuWuNchT63qu2Gi-mh7J2csbGs0zjJST7ZqwngXPVNg/formResponse"
+          target="googleFormTarget" id="rsvpForm" data-netlify="true">
           <!-- Full Name -->
           <div class="form-group">
             <label class="form-label" for="guestName">Your Full Name *</label>
-            <input type="text" id="guestName" name="name" class="form-input" placeholder="e.g. Maria Santos" required>
+            <input type="text" id="guestName" name="entry.1309734569" class="form-input" placeholder="e.g. Maria Santos"
+              required>
           </div>
 
           <!-- Contact Number -->
           <div class="form-group">
             <label class="form-label" for="guestContact">Contact / Mobile Number *</label>
-            <input type="tel" id="guestContact" name="contact" class="form-input" placeholder="e.g. 0917 123 4567"
-              required>
+            <input type="tel" id="guestContact" name="entry.478969053" class="form-input"
+              placeholder="e.g. 0917 123 4567" required>
           </div>
 
           <!-- Attendance Radio -->
@@ -566,33 +578,30 @@
             <label class="form-label">Will you be attending? *</label>
             <div class="form-radio-group">
               <label class="radio-label">
-                <input type="radio" name="attendance" value="attending" checked required>
+                <input type="radio" name="entry.1791767315" value="Joyfully Accepts" checked required>
                 <span>Joyfully Accepts <span class="star-accent">✦</span></span>
               </label>
               <label class="radio-label">
-                <input type="radio" name="attendance" value="declined" required>
+                <input type="radio" name="entry.1791767315" value="Regretfully Declines" required>
                 <span>Regretfully Declines</span>
               </label>
             </div>
           </div>
 
-          <!-- Number of Guests -->
-          <div class="form-group">
-            <label class="form-label" for="guestCount">Number of Attendees</label>
-            <select id="guestCount" name="guest_count" class="form-select">
-              <option value="1">1 Person (Just me)</option>
-              <option value="2">2 Persons</option>
-            </select>
+          <!-- Reserved Seat Allocation Note (Strictly 1 Seat, No Plus-Ones) -->
+          <div class="rsvp-seat-badge">
+            <span class="star-accent">✦</span>
+            <span><strong>Seat Reservation:</strong> 1 Seat Exclusively Reserved for You (Strictly no plus-ones)</span>
           </div>
 
           <!-- Message for Agatha -->
           <div class="form-group">
             <label class="form-label" for="guestMessage">Message &amp; Birthday Wishes for Agatha</label>
-            <textarea id="guestMessage" name="message" class="form-textarea" rows="4"
+            <textarea id="guestMessage" name="entry.874612004" class="form-textarea" rows="4"
               placeholder="Share your warm thoughts, memories, or wishes for the debutante..."></textarea>
           </div>
 
-          <button type="submit" class="btn-submit">Submit RSVP</button>
+          <button type="submit" class="btn-submit" id="btnSubmitRSVP">Submit RSVP</button>
         </form>
       </div>
     </section>
